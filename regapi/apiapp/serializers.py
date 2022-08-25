@@ -5,7 +5,7 @@ from .models import Song, Singer
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['username', 'password']
 
 class SongSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,7 +13,7 @@ class SongSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class SingerSerializer(serializers.ModelSerializer):
-    songs = SongSerializer()
+    songs = SongSerializer(many=True, read_only=True)
     class Meta:
         model = Singer
         fields = ['id', 'singer_name', 'gender', 'songs']
